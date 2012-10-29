@@ -17,7 +17,26 @@
 			</tr>
 			<tr>
 				<td>
-					Input
+					Input stats
+				</td>
+				<td>
+					<p>
+						<%= pluralize(@input.lines.count, "line") %>
+						<br />
+						<b>Reporter number:</b> <%= @reporter_number %>
+						<br />
+						<b>Petitioner:</b> <%= @petitioner %>
+						<br />
+						<b>Respondent:</b> <%= @respondent %>
+						<br />
+						<b>Decision year:</b> <%= @decision_year %>
+						<br />
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Input text
 				</td>
 				<td>
 					<%= simple_format(@input) %>
