@@ -1,14 +1,86 @@
 <!DOCTYPE html>
-<html>
+
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+
   <title>Bane</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
+
   <%= csrf_meta_tags %>
+  <%= javascript_include_tag "application" %>
+
 </head>
 <body>
 
-<%= yield %>
+  <!-- Navigation -->
 
+  <nav class="top-bar fixed">
+    <ul>
+      <li class="name"><h1><a href="#">Title</a></h1></li>
+      <li class="toggle-topbar"><a href="#"></a></li>
+    </ul>
+
+    <section>
+      <ul class="left">
+        <li><a href="#">Link</a></li>
+        <li><a href="#">Link</a></li>
+        <li><a href="#">Link</a></li>
+      </ul>
+
+      <ul class="right">
+        <li class="has-dropdown">
+          <a href="#">Link</a>
+
+          <ul class="dropdown">
+            <li><a href="#">Dropdown Link</a></li>
+            <li><a href="#">Dropdown Link</a></li>
+            <li><a href="#">Dropdown Link</a></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+  </nav><br><br>
+
+  <!-- End Navigation -->
+
+
+  <!-- Header -->
+
+    <img src="http://placehold.it/1600x600&text=Header"><br><br>
+
+  <!-- End Header -->
+
+  <%= yield %>
+
+  <!-- Footer -->
+
+  <footer class="row">
+  <div class="twelve columns"><hr />
+      <div class="row">
+
+        <div class="six columns">
+            <p>&copy; Copyright no one at all. Go to town.</p>
+        </div>
+
+        <div class="six columns">
+            <ul class="link-list right">
+              <li><a href="#">Link 1</a></li>
+              <li><a href="#">Link 2</a></li>
+              <li><a href="#">Link 3</a></li>
+              <li><a href="#">Link 4</a></li>
+            </ul>
+        </div>
+
+      </div>
+  </div>
+  </footer>
+  
 </body>
 </html>
