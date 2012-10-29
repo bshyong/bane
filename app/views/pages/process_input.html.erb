@@ -1,0 +1,28 @@
+<div class="row">
+	<div class="nine panel columns centered">
+		<h3>Pages#process_input</h3>
+		<p>
+			<b>
+				<%= link_to "Start over", root_path %>
+			</b>
+		</p>
+		<table>
+			<tr>
+				<td>
+					Output
+				</td>
+				<td>
+					<%= @output %>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Input
+				</td>
+				<td>
+					<%= simple_format(@input) %>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>

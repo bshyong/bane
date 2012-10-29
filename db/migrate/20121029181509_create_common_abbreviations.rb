@@ -6,5 +6,7 @@ class CreateCommonAbbreviations < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :common_abbreviations, :word
+    add_index :common_abbreviations, :abbreviation
   end
 end
