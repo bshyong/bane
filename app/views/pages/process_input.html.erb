@@ -21,7 +21,7 @@
 				</td>
 				<td>
 					<p>
-						<%= pluralize(@input.lines.count, "line") %>
+						<%= pluralize(@input.lines.count, "line") rescue "Error occurred!" %>
 						<br />
 						<b>Reporter number:</b> <%= @reporter_number %>
 						<br />
