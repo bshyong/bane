@@ -23,8 +23,9 @@ class PagesController < ApplicationController
         @respondent = abbreviate_words(respondent.scan(/[A-Z]{2,}/).join(" ")).titleize
         count += 1
       end
-      @output = @petitioner.strip.titleize + ' v. ' + @respondent.strip.titleize + ", " + @reporter_number + " (#{@decision_year})."
-  	end
+      @output = @petitioner.strip.titleize + ' v. ' + @respondent.strip.titleize + ", " + @reporter_number + " (#{@decision_year})." rescue "Error occurred!"
+  	  CitationHistory.create(:input => @input, :output => @output)
+    end
   end
 
 private
