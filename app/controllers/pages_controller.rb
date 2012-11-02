@@ -3,6 +3,10 @@ class PagesController < ApplicationController
   def home
   end
 
+  def show
+    @history = CitationHistory.find(params[:id])
+  end
+
   def process_input
   	unless params[:input].blank?
   		@input = params[:input]
@@ -24,12 +28,22 @@ class PagesController < ApplicationController
         count += 1
       end
       @output = @petitioner.strip.titleize + ' v. ' + @respondent.strip.titleize + ", " + @reporter_number + " (#{@decision_year})." rescue "Error occurred!"
-  	  CitationHistory.create(:input => @input, :output => @output)
+      @history = CitationHistory.create(:input => @input, :output => @output)
+      if @output == "Error occurred!"
+        @history.update_attribute(:correct, false)
+      end
     end
   end
 
   def history
-    @citation_histories = CitationHistory.all
+    @citation_histories = CitationHistory.find(:all, :order => 'created_at DESC')
+  end
+
+  def mark_citation
+    return if (params[:v].blank? || params[:id].blank?)
+    value = params[:v]
+    CitationHistory.find(params[:id]).update_attribute(:correct, value)
+    render :nothing => true
   end
 
 private

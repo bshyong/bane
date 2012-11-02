@@ -1,0 +1,38 @@
+<style>
+    span.label.disabled{
+        background-color: #ccc;
+    }
+    span.label a {
+        color:white;
+    }
+</style>
+
+<div class="row">
+    <div class="nine panel columns centered">
+        <h3>Pages#process_input</h3>
+        <p>
+            <b><%= link_to "Start over", root_path %></b>
+            <br />
+            <b>This citation is:</b>
+            <span class="round <%= @history.correct ? "success" : "alert" %> label"><%= @history.correct ? "correct" : "incorrect" %></span>
+        </p>
+        <table>
+            <tr style="background:#D5E9FC;">
+                <td>
+                    Output
+                </td>
+                <td style="font-size:18px;line-height:1.0;">
+                    <%= @history.output %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Input text
+                </td>
+                <td>
+                    <%= simple_format(@history.input) %>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

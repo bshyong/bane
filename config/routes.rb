@@ -3,6 +3,8 @@ Bane::Application.routes.draw do
   get "pages/home"
   match "/process_input" => "pages#process_input"
   match "/history" => "pages#history"
+  match "/mark" => "pages#mark_citation"
+  match "/show/:id" => "pages#show", :as => :citation_history
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

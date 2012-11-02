@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="nine panel columns centered">
+    <div class="twelve panel columns centered">
         <h3>Pages#history (should be ADMIN only!)</h3>
         <p>
             <b>
@@ -7,29 +7,31 @@
             </b>
         </p>
         <table>
-            <% @citation_histories.each do |ch| %>
             <thead>
                 <tr>
+                    <th>Status</th>
                     <th>Input</th>
                     <th>Output</th>
                     <th>Date</th>
                 </tr>
             </thead>
             <tbody>
+            <% @citation_histories.each do |ch| %>
              <tr>
+                <td>
+                    <%= ch.correct ? "<span class='round success label'>Correct</span>".html_safe : "<span class='round alert label'>Incorrect</span>".html_safe %>
+                </td>
                 <td>
                     <%= simple_format(ch.input) %>
                 </td>
                 <td>
                     <%= simple_format(ch.output) %>
                 </td>
-                <td><%= time_ago_in_words(ch.created_at) %> ago
-                    <br />
-                    <%= ch.created_at.strftime("%l:%M:%S %P, %b %e %Y") %>
+                <td><%= time_ago_in_words(ch.created_at) %> ago, <%= ch.created_at.strftime("%l:%M:%S %P, %b %e %Y") %>
                 </td>
               </tr>
-            </tbody>
             <% end %>
+            </tbody>
         </table>
     </div>
 </div>

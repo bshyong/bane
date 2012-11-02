@@ -1,10 +1,34 @@
+<style>
+	span.label {
+		cursor:pointer;
+	}
+	span.label.disabled{
+		background-color: #ccc;
+	}
+	span.label a {
+		color:white;
+	}
+</style>
+
 <div class="row">
 	<div class="nine panel columns centered">
 		<h3>Pages#process_input</h3>
 		<p>
-			<b>
-				<%= link_to "Start over", root_path %>
-			</b>
+			<b><%= link_to "Start over", root_path %></b>
+			<br />
+			<b>This citation is:</b>
+			<span class="round success label" id="correct-citation"><%= link_to "Correct", "/mark?id=#{@history.id}&v=true", :remote => true %></span>
+			<span class="round alert label" id="incorrect-citation"><%= link_to "Incorrect", "/mark?id=#{@history.id}&v=false", :remote => true %></span>
+			<script>
+				$('#correct-citation').click(function(){
+					$('#incorrect-citation').addClass("disabled");
+					$('#correct-citation').removeClass("disabled");
+				});
+				$('#incorrect-citation').click(function(){
+					$('#correct-citation').addClass("disabled");
+					$('#incorrect-citation').removeClass("disabled");
+				});
+			</script>
 		</p>
 		<table>
 			<tr style="background:#D5E9FC;">

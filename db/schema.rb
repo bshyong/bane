@@ -11,15 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121102165833) do
+ActiveRecord::Schema.define(:version => 20121102183553) do
 
   create_table "citation_histories", :force => true do |t|
     t.text     "input"
     t.text     "output"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.boolean  "correct"
   end
 
+  add_index "citation_histories", ["correct"], :name => "index_citation_histories_on_correct"
   add_index "citation_histories", ["created_at"], :name => "index_citation_histories_on_created_at"
 
   create_table "common_abbreviations", :force => true do |t|
