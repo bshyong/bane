@@ -7,15 +7,22 @@ class PagesController < ApplicationController
   	unless params[:input].blank?
   		@input = params[:input]
   		lines = Array.new
+      count = 1
   		@input.lines.each do |l|
   			lines << l
   		end
-      @decision_year = /(decided).+\d{4}/i.match(@input) {|m| /\d{4}/.match(m.to_s)}
+      @decision_year = @input.scan(/\d{4}/).last
   		@reporter_number = lines[0] rescue 'Error occurred.'
-  		petitioner = lines[2].split(",")[0] rescue 'Error occurred.'
-      @petitioner = abbreviate_words(petitioner).titleize
-  		respondent = lines[4].split()[1] rescue 'Error occurred.'
-      @respondent = abbreviate_words(respondent).titleize
+      while (@petitioner.blank? && count < lines.length)
+        petitioner = lines[count].split(",")[0] rescue 'Error occurred.'
+        @petitioner = abbreviate_words(petitioner.scan(/[A-Z]{2,}/).join(" ")).titleize
+        count += 1
+      end
+      while (@respondent.blank? && count < lines.length)
+        respondent = lines[count].split(",")[0] rescue 'Error occurred.'
+        @respondent = abbreviate_words(respondent.scan(/[A-Z]{2,}/).join(" ")).titleize
+        count += 1
+      end
       @output = @petitioner.strip.titleize + ' v. ' + @respondent.strip.titleize + ", " + @reporter_number + " (#{@decision_year})."
   	end
   end
