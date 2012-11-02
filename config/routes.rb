@@ -1,7 +1,8 @@
 Bane::Application.routes.draw do
-  
+
   get "pages/home"
   match "/process_input" => "pages#process_input"
+  match "/history" => "pages#history"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

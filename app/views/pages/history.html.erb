@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="nine panel columns centered">
+        <h3>Pages#history (should be ADMIN only!)</h3>
+        <p>
+            <b>
+                <%= link_to "Go back to home page", root_path %>
+            </b>
+        </p>
+        <table>
+            <% @citation_histories.each do |ch| %>
+            <thead>
+                <tr>
+                    <th>Input</th>
+                    <th>Output</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+             <tr>
+                <td>
+                    <%= simple_format(ch.input) %>
+                </td>
+                <td>
+                    <%= simple_format(ch.output) %>
+                </td>
+                <td><%= time_ago_in_words(ch.created_at) %> ago
+                    <br />
+                    <%= ch.created_at.strftime("%l:%M:%S %P, %b %e %Y") %>
+                </td>
+              </tr>
+            </tbody>
+            <% end %>
+        </table>
+    </div>
+</div>

@@ -28,6 +28,10 @@ class PagesController < ApplicationController
     end
   end
 
+  def history
+    @citation_histories = CitationHistory.all
+  end
+
 private
 
 def abbreviate_words(input = nil)
