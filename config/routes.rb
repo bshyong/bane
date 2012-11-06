@@ -1,5 +1,7 @@
 Bane::Application.routes.draw do
 
+  resources :test_cases
+
   get "pages/home"
   match "/process_input" => "pages#process_input"
   match "/history" => "pages#history"

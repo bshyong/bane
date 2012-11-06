@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="nine panel columns centered">
+        <p id="notice"><%= notice %></p>
+
+        <p>
+          <b>Input:</b>
+          <%= @test_case.input %>
+        </p>
+
+        <p>
+          <b>Output:</b>
+          <%= @test_case.output %>
+        </p>
+
+
+        <%= link_to 'Edit', edit_test_case_path(@test_case) %> |
+        <%= link_to 'Back', test_cases_path %>
+    </div>
+</div>

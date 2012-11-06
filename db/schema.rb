@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121102183553) do
+ActiveRecord::Schema.define(:version => 20121106201115) do
 
   create_table "citation_histories", :force => true do |t|
     t.text     "input"
@@ -33,5 +33,12 @@ ActiveRecord::Schema.define(:version => 20121102183553) do
 
   add_index "common_abbreviations", ["abbreviation"], :name => "index_common_abbreviations_on_abbreviation"
   add_index "common_abbreviations", ["word"], :name => "index_common_abbreviations_on_word"
+
+  create_table "test_cases", :force => true do |t|
+    t.text     "input"
+    t.text     "output"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
 end
