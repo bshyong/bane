@@ -14,7 +14,7 @@
     <div class="nine panel columns centered">
         <h3>Pages#process_input</h3>
         <p>
-            <b><%= link_to "Back to home page", root_path %></b>
+            <b><%= link_to "Back to home page", root_path %></b> | <b><%= link_to "Create new test case", new_test_case_path %></b>
             <br /><br />
             <b>Status: </b>
             <span class="round label <%= @errors.empty? ? 'success' : 'alert' %>">
