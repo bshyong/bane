@@ -6,4 +6,9 @@ class PagesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "abbreviations" do
+    get(:process_input, {'input' => 'INPUT'}
+    assert_equal(:output, 'OUTPUT')
+  end
+
 end
