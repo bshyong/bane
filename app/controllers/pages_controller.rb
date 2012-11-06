@@ -20,20 +20,23 @@ class PagesController < ApplicationController
       while (@petitioner.blank? && count < lines.length)
         petitioner = lines[count] rescue 'Error occurred.'
         petitioner_string = petitioner.scan(/[A-Z]{2,}\W?/)
-        unless (petitioner_string.last.to_s.downcase.strip=="inc.")
-          petitioner_string[petitioner_string.split.length-1] = petitioner_string.last.to_s.gsub(/[,|.]/, "")
-        end
-
         @petitioner = abbreviate_words(petitioner_string.join(" ")).titleize
+        unless (@petitioner.split.last.downcase.strip=="inc." rescue true)
+          petitioner_dirty = @petitioner.split
+          petitioner_dirty[petitioner_dirty.length-1] = petitioner_dirty.last.to_s.gsub(/[,|.]/, "")
+          @petitioner = petitioner_dirty.join(" ").titleize
+        end
         count += 1
       end
       while (@respondent.blank? && count < lines.length)
         respondent = lines[count] rescue 'Error occurred.'
         respondent_string = respondent.scan(/[A-Z]{2,}\W?/)
-        unless (respondent_string.last.to_s.downcase.strip=="inc.")
-          respondent_string[respondent_string.split.length-1] = respondent_string.last.to_s.gsub(/[,|.]/, "")
-        end
         @respondent = abbreviate_words(respondent_string.join(" ")).titleize
+        unless (@respondent.split.last.downcase.strip=="inc." rescue true)
+          respondent_dirty = @respondent.split
+          respondent_dirty[respondent_dirty.length-1] = respondent_dirty.last.to_s.gsub(/[,|.]/, "")
+          @respondent = respondent_dirty.join(" ").titleize
+        end
         count += 1
       end
       @output = @petitioner.strip.titleize + ' v. ' + @respondent.strip.titleize + ", " + @reporter_number + " (#{@decision_year})." rescue "Error occurred!"
@@ -60,15 +63,19 @@ private
 def abbreviate_words(input = nil)
     return false if input.nil?
     result = String.new
-    input.scan(/[\w]+/) do |word|
+    input.scan(/[A-Z]{2,}/) do |word|
         ca = CommonAbbreviation.find_by_word(word.downcase)
         if ca.blank?
-            result = input
+            result = input if result.blank?
         else
-            result = input.downcase.gsub(word, ca.abbreviation)
+            result = input.downcase.gsub!(word.downcase, ca.abbreviation)
         end
     end
     return result
+end
+
+def clean_string
+
 end
 
 end
