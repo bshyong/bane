@@ -7,6 +7,7 @@ Bane::Application.routes.draw do
   match "/history" => "pages#history"
   match "/mark" => "pages#mark_citation"
   match "/show/:id" => "pages#show", :as => :citation_history
+  match "/status" => "pages#status"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

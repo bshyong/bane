@@ -1,0 +1,124 @@
+<style>
+    span.label {
+        cursor:pointer;
+    }
+    span.label.disabled{
+        background-color: #ccc;
+    }
+    span.label a {
+        color:white;
+    }
+</style>
+
+<div class="row">
+    <div class="nine panel columns centered">
+        <h3>Pages#process_input</h3>
+        <p>
+            <b><%= link_to "Back to home page", root_path %></b>
+            <br /><br />
+            <b>Status: </b>
+            <span class="round label <%= @errors.empty? ? 'success' : 'alert' %>">
+                <%= @errors.count %> failing, <%= @correct.count %> successful, <%= @correct.count + @errors.count %> total
+            </span>
+            <span style="margin-left:15px;font-size:1.1em;" class="round label secondary">
+                <b><%= (100*(@correct.count).abs/(@errors.count+@correct.count).to_f).round(2) %>% success rate</b>
+            </span>
+        </p>
+        <table>
+            <% @errors.each do |e| %>
+                <tr style="background:#D5E9FC;">
+                    <td>
+                        Output
+                    </td>
+                    <td style="font-size:18px;line-height:1.0;" id="output">
+                        <%= e[1]["output"] %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Expected output
+                    </td>
+                    <td style="font-size:18px;line-height:1.0;" id="output">
+                        <%= e[0].output %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="round alert label" class="incorrect-citation">Incorrect</span>
+                        <br /><br />
+                        <b>Test case <%= e[0].id %></b>
+                    </td>
+                    <td>
+                        <p>
+                            <%= pluralize(e[1]["input"].lines.count, "line") rescue "Error occurred!" %>
+                            <br />
+                            <b>Reporter number:</b> <%= e[1]["reporter_number"] %>
+                            <br />
+                            <b>Petitioner:</b> <%= e[1]["petitioner"] %>
+                            <br />
+                            <b>Respondent:</b> <%= e[1]["respondent"] %>
+                            <br />
+                            <b>Decision year:</b> <%= e[1]["decision_year"] %>
+                            <br />
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Input text
+                    </td>
+                    <td id="input">
+                        <%= simple_format(e[1]["input"]) %>
+                    </td>
+                </tr>
+            <% end %>
+            <% @correct.each do |e| %>
+                <tr style="background:#D5E9FC;">
+                    <td>
+                        Output
+                    </td>
+                    <td style="font-size:18px;line-height:1.0;" id="output">
+                        <%= e[1]["output"] %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Expected output
+                    </td>
+                    <td style="font-size:18px;line-height:1.0;" id="output">
+                        <%= e[0].output %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="round success label" class="correct-citation">Correct</span>
+                        <br /><br />
+                        <b>Test case <%= e[0].id %></b>
+                    </td>
+                    <td>
+                        <p>
+                            <%= pluralize(e[1]["input"].lines.count, "line") rescue "Error occurred!" %>
+                            <br />
+                            <b>Reporter number:</b> <%= e[1]["reporter_number"] %>
+                            <br />
+                            <b>Petitioner:</b> <%= e[1]["petitioner"] %>
+                            <br />
+                            <b>Respondent:</b> <%= e[1]["respondent"] %>
+                            <br />
+                            <b>Decision year:</b> <%= e[1]["decision_year"] %>
+                            <br />
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Input text
+                    </td>
+                    <td id="input">
+                        <%= simple_format(e[1]["input"]) %>
+                    </td>
+                </tr>
+            <% end %>
+        </table>
+    </div>
+</div>

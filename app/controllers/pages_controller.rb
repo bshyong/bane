@@ -3,6 +3,18 @@ class PagesController < ApplicationController
   def home
   end
 
+  def status
+    @errors = Array.new
+    @correct = Array.new
+    TestCase.all.each do |t|
+      if t.output.squish == process_input_method(t.input)["output"].squish
+        @correct << [t, process_input_method(t.input)]
+      else
+        @errors << [t, process_input_method(t.input)]
+      end
+    end
+  end
+
   def show
     @history = CitationHistory.find(params[:id])
   end
